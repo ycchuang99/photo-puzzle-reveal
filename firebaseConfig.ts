@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, onSnapshot, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, onSnapshot, setDoc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { GridSection } from './types';
 
 // --- CONFIGURATION ---
@@ -50,7 +50,18 @@ export const unlockSectionInDb = async (index: number, currentSections: GridSect
     });
   } else {
     const currentData = JSON.parse(localStorage.getItem('wedding_puzzle_data') || '{}');
+    // Keep existing image, just update sections
     saveGameState(currentData.imageUrl, newSections);
+  }
+};
+
+// Reset the entire game
+export const resetGame = async () => {
+  if (isFirebaseConfigured && db) {
+    await deleteDoc(doc(db, "games", "wedding_puzzle"));
+  } else {
+    localStorage.removeItem('wedding_puzzle_data');
+    window.dispatchEvent(new Event('storage_update'));
   }
 };
 

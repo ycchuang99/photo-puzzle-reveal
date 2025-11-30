@@ -162,7 +162,7 @@ const App: React.FC = () => {
         </div>
         <button 
           onClick={() => setIsAdmin(!isAdmin)}
-          className="p-2 text-stone-400 hover:text-stone-600 transition-colors"
+          className={`p-2 transition-colors rounded-full ${isAdmin ? 'bg-rose-100 text-rose-500' : 'text-stone-400 hover:text-stone-600'}`}
           title="Admin Panel"
         >
           <Settings className="w-5 h-5" />
@@ -216,6 +216,7 @@ const App: React.FC = () => {
             {isAdmin ? (
                <AdminPanel 
                  currentImageUrl={imageUrl} 
+                 sections={sections}
                  gridSize={GRID_SIZE} 
                />
             ) : (
