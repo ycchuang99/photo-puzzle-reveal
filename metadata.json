@@ -1,0 +1,5 @@
+{
+  "name": "Wedding Puzzle Reveal",
+  "description": "A wedding-themed image reveal game where guests unlock memories by scanning QR codes.",
+  "requestFramePermissions": []
+}
